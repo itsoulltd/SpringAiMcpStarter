@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringAiMcpStarterApplication {
+public class SpringAiMcpStarter {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringAiMcpStarterApplication.class, args);
+		SpringApplication.run(SpringAiMcpStarter.class, args);
 	}
 
 }
