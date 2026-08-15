@@ -129,12 +129,17 @@ server.servlet.context-path=/api
 
 # Spring.AI MCP server config
 spring.ai.mcp.server.protocol=STREAMABLE
-spring.ai.mcp.server.streamable-http.mcp-endpoint=/mcp
+spring.ai.mcp.server.streamable-http.mcp-endpoint=/edgemcp
 ```
 
 the effective URL is typically:
 ```
-http://localhost:8080/api/mcp
+http://localhost:8080/api/edgemcp
+```
+
+The Spring AI documentation confirms that the Streamable HTTP endpoint is configurable and defaults value is set to
+```
+/mcp
 ```
 
 Spring AI 2.0 recommends **Streamable HTTP** rather than the older SSE transport for new HTTP servers; SSE is deprecated in 2.0.0. ([Home][1])
