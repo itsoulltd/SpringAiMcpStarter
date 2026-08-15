@@ -1,0 +1,41 @@
+package com.infoworks.mcp.domain.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.infoworks.entity.Entity;
+import jakarta.persistence.*;
+
+@MappedSuperclass
+public class Persistable<ID, VERSION> extends Entity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private ID id;
+
+    @Version @JsonIgnore
+    private VERSION version;
+
+    public ID getId() {
+        return id;
+    }
+
+    public void setId(ID id) {
+        this.id = id;
+    }
+
+    public VERSION getVersion() {
+        return version;
+    }
+
+    public void setVersion(VERSION version) {
+        this.version = version;
+    }
+
+    @JsonIgnore
+    public String getPrimaryKeyName() {
+        if (getClass().isAnnotationPresent(AttributeOverride.class)){
+            AttributeOverride attr = getClass().getAnnotation(AttributeOverride.class);
+            return attr.column().name();
+        }
+        return "id";
+    }
+}
