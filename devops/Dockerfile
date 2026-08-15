@@ -32,7 +32,7 @@ WORKDIR $HOME
 COPY --from=build /app/target/*.jar app.jar
 
 # Expose Spring Boot default port
-EXPOSE 8080
+EXPOSE 8081
 
 # Optional:
 ENV JAVA_TOOL_OPTIONS="\

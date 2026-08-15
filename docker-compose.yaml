@@ -19,7 +19,7 @@ services:
       app.db.username: root
       app.db.password: root@123
     ports:
-      - "8080:8080"
+      - "8080:8081"
     restart: unless-stopped
     networks:
       - web-app-net
