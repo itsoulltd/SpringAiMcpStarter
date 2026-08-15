@@ -59,4 +59,8 @@ public class UserService extends SimpleDataSource<String, User> {
         }
         return existing;
     }
+
+    public List<User> search(String query) {
+        return repository.findByEmailOrName(query);
+    }
 }
