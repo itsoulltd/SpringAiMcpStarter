@@ -105,7 +105,7 @@ For an HTTP MCP server, Spring AI 2.0.0 provides the WebMVC starter:
 </dependency>
 ```
 
-Then configure:
+Then configure: (application.yaml)
 
 ```yaml
 spring:
@@ -113,6 +113,28 @@ spring:
     mcp:
       server:
         protocol: STREAMABLE
+```
+
+Or application.properties
+
+```properties
+spring.ai.mcp.server.protocol=STREAMABLE
+```
+
+Spring AI 2.0 allow to customize the defaults MCP endpoint to something else with the conjunction of server.servlet.context-path=/api
+
+```properties
+##Spring-Servlet Config
+server.servlet.context-path=/api
+
+# Spring.AI MCP server config
+spring.ai.mcp.server.protocol=STREAMABLE
+spring.ai.mcp.server.streamable-http.mcp-endpoint=/mcp
+```
+
+the effective URL is typically:
+```
+http://localhost:8080/api/mcp
 ```
 
 Spring AI 2.0 recommends **Streamable HTTP** rather than the older SSE transport for new HTTP servers; SSE is deprecated in 2.0.0. ([Home][1])
@@ -552,6 +574,14 @@ spring:
         name: customer-server
         version: 1.0.0
         protocol: STREAMABLE
+```
+
+Or application.properties
+
+```properties
+spring.ai.mcp.server.name=customer-server
+spring.ai.mcp.server.version=1.0.0
+spring.ai.mcp.server.protocol=STREAMABLE
 ```
 
 ### Existing service
