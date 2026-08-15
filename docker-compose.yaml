@@ -1,0 +1,27 @@
+version: "3.9"
+
+networks:
+  web-app-net:
+    name: my-web-app-net
+    driver: bridge
+
+services:
+  agentic-ai-app:
+    image: agentic-mcp-app:1.0
+    build:
+      context: .
+      dockerfile: devops/Dockerfile
+    environment:
+      app.disable.security: true
+      app.db.host: postgres-db
+      app.db.port: 5432
+      app.db.name: aiTestDB
+      app.db.username: root
+      app.db.password: root@123
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - web-app-net
+
+#end of scripts
