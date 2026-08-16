@@ -27,16 +27,19 @@ public class UserMcpTools {
         return userService.search(query);
     }
 
-    @McpTool(name = "create_user", description = "Create a new user")
-    public User createUser(String name, String email) {
+    @McpTool(name = "create_user"
+            , description = "Create a new user with payload as a key-value pairs that contains the User update properties.")
+    public User createUser(String name, Map<String, Object> payload) {
         User user = new User();
+        user.unmarshalling(payload, false);
         user.setName(name);
-        user.setEmail(email);
         userService.put(name, user);
         return user;
     }
 
-    @McpTool(name = "update_user", description = "Update an existing user, user name is as uniq id")
+    @McpTool(name = "update_user"
+            , description = "Update an existing user, user name is as uniq ID." +
+            " Payload should be key-value pairs that contains the User update properties.")
     public User updateUser(String name, Map<String, Object> payload) {
         User user = new User();
         user.unmarshalling(payload, false);
@@ -44,7 +47,7 @@ public class UserMcpTools {
         return userService.replace(name, user);
     }
 
-    @McpTool(name = "delete_user", description = "Delete a user by name. Here name is uniq ID")
+    @McpTool(name = "delete_user", description = "Delete a user by name. Property name is as uniq ID")
     public User deleteCustomer(String name) {
         return userService.remove(name);
     }
