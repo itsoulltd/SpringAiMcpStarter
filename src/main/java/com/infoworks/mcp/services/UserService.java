@@ -3,6 +3,8 @@ package com.infoworks.mcp.services;
 import com.infoworks.data.impl.SimpleDataSource;
 import com.infoworks.mcp.domain.entities.User;
 import com.infoworks.mcp.domain.repositories.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import java.util.List;
 @Service("userService")
 public class UserService extends SimpleDataSource<String, User> {
 
+    private static Logger LOG = LoggerFactory.getLogger(UserService.class);
     private UserRepository repository;
 
     public UserService(UserRepository repository) {
@@ -37,7 +40,17 @@ public class UserService extends SimpleDataSource<String, User> {
 
     @Override
     public void put(String key, User user) {
-        repository.save(user);
+        String savedId = add(user);
+        LOG.info("New User Created: " + savedId);
+    }
+
+    @Override
+    public String add(User user) throws RuntimeException {
+        if (read(user.getName()) != null)
+            throw new RuntimeException("User already exist by this name!");
+        //Other-wise:
+        User saved = repository.save(user);
+        return saved.getName();
     }
 
     @Override
