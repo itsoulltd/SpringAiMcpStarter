@@ -4,7 +4,6 @@ import com.infoworks.entity.PrimaryKey;
 import com.infoworks.entity.TableName;
 import com.infoworks.mcp.domain.constraint.Gender.IsValidGender;
 import com.infoworks.mcp.domain.models.Gender;
-import com.infoworks.objects.Ignore;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -18,7 +17,7 @@ import java.util.Objects;
 public class User extends Auditable<Integer, Long> {
 
 	@PrimaryKey(name="id", auto=true)
-	@Id @GeneratedValue(strategy = GenerationType.AUTO)
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
     @NotNull(message = "name must not be null.")
@@ -47,12 +46,7 @@ public class User extends Auditable<Integer, Long> {
 
 	private boolean active;
 
-	@Ignore
-	private static int _autoIncrement = -1;
-
-	public User() {
-	    this.id = ++_autoIncrement;
-    }
+	public User() {}
 
     public User(@NotNull(message = "Name must not be null") String name
             , Gender sex, @Min(value = 18, message = "Min Value is 18.") int age) {
