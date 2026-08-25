@@ -1,6 +1,7 @@
 ### Run the application:
 ```
 ~>$ mvn clean spring-boot:run
+> Now local mcp server is running as http://localhost:8081/api/mcp
 ```
 
 ### MCP Inspector let you inspect an MCP Server for things like:

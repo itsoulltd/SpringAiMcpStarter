@@ -36,6 +36,7 @@ public class StartupConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
         //How to use executor:
         System.out.println(String.format("http://%s:%s%s/swagger-ui/index.html", serverDomain, serverPort, servletContext));
+        System.out.println(String.format("http://%s:%s%s%s", serverDomain, serverPort, servletContext, "/mcp"));
         if (activeDriverClass.equalsIgnoreCase(JDBCDriverClass.H2_EMBEDDED.toString())
                 && Boolean.parseBoolean(isH2ConsoleEnabled)){
             System.out.println(String.format("http://%s:%s%s%s", serverDomain, serverPort, servletContext, h2ConsolePath));
